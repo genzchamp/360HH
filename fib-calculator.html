@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pro Fibonacci Calculator</title>
+<style>
+  body {
+    background: #0e0e0e;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .container {
+    max-width: 500px;
+    margin: auto;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+  }
+  button {
+    width: 100%;
+    padding: 14px;
+    background: gold;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .levels {
+    margin-top: 25px;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 12px;
+  }
+  table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  table th, table td {
+    padding: 8px;
+    text-align: left;
+  }
+  canvas {
+    margin-top: 25px;
+    background: #1a1a1a;
+    width: 100%;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2 style="text-align:center;">📈 Pro Fibonacci Calculator</h2>
+
+  <label>Swing High:</label>
+  <input type="number" id="high" placeholder="Enter swing high price">
+
+  <label>Swing Low:</label>
+  <input type="number" id="low" placeholder="Enter swing low price">
+
+  <button onclick="calculateFib()">Generate Levels</button>
+
+  <div class="levels" id="output"></div>
+
+  <canvas id="fibChart" height="250"></canvas>
+</div>
+
+<script>
+function calculateFib() {
+  let high = parseFloat(document.getElementById("high").value);
+  let low = parseFloat(document.getElementById("low").value);
+
+  if (isNaN(high) || isNaN(low) || high === low) {
+    alert("Invalid input");
+    return;
+  }
+
+  let diff = high - low;
+
+  let retracements = {
+    "0%": high,
+    "23.6%": high - diff * 0.236,
+    "38.2%": high - diff * 0.382,
+    "50%": high - diff * 0.5,
+    "61.8%": high - diff * 0.618,
+    "78.6%": high - diff * 0.786,
+    "100%": low
+  };
+
+  let extensions = {
+    "1.272": low - diff * 0.272,
+    "1.618": low - diff * 0.618,
+    "2.0": low - diff * 1,
+    "2.618": low - diff * 1.618
+  };
+
+  let html = "<h3>Retracement Levels</h3><table>";
+  for (let key in retracements) {
+    html += `<tr><td>${key}</td><td>${retracements[key].toFixed(3)}</td></tr>`;
+  }
+  html += "</table>";
+
+  html += "<h3>Extension Levels</h3><table>";
+  for (let key in extensions) {
+    html += `<tr><td>${key}</td><td>${extensions[key].toFixed(3)}</td></tr>`;
+  }
+  html += "</table>";
+
+  document.getElementById("output").innerHTML = html;
+
+  drawChart(high, low, retracements);
+}
+
+function drawChart(high, low, levels) {
+  let canvas = document.getElementById("fibChart");
+  let ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  let y = 20;
+  let gap = 30;
+
+  for (let key in levels) {
+    ctx.fillStyle = "#fff";
+    ctx.fillText(`${key} → ${levels[key].toFixed(3)}`, 10, y);
+
+    ctx.strokeStyle = "#888";
+    ctx.beginPath();
+    ctx.moveTo(200, y - 5);
+    ctx.lineTo(canvas.width - 20, y - 5);
+    ctx.stroke();
+
+    y += gap;
+  }
+}
+</script>
+</body>
+</html>
