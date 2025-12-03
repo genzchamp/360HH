@@ -1,242 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>360 Halal Hustlers Hub</title>
-  <meta name="description" content="360 Halal Hustlers — halal trading, tools, and digital hustle resources." />
-  <style>
-    /* Root colors — luxury + Islamic-modern blend */
-    :root{
-      --bg:#070708;          /* deep rich black */
-      --card:#0f1112;        /* slightly lighter card */
-      --gold:#D4AF37;        /* warm gold */
-      --muted:#9aa0a6;       /* soft muted text */
-      --neon-ash:#6f7a7f;    /* neon ash accent */
-      --accent: rgba(212,175,55,0.12);
-      --glass: rgba(255,255,255,0.03);
-      --radius:16px;
-      --maxw:1100px;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>360 Halal Hustlers Hub — Tools & Education</title>
+<meta name="description" content="360 Halal Hustlers — halal trading tools, strategies and education." />
 
-    /* Global layout */
-    html,body{height:100%;}
-    body{
-      margin:0;
-      background: linear-gradient(180deg, var(--bg) 0%, #060607 60%);
-      color:#fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:24px 16px;
-      display:flex;
-      justify-content:center;
-    }
+<style>
+  :root{
+    --bg:#070708;
+    --card:#0f1112;
+    --gold:#D4AF37;
+    --muted:#9aa0a6;
+    --glass:rgba(255,255,255,0.03);
+    --radius:14px;
+    --accent: rgba(212,175,55,0.08);
+    --maxw:1100px;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  }
 
-    .wrap{width:100%;max-width:var(--maxw);} 
+  /* Reset + layout */
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg) 0%, #060607 60%);color:#fff}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:24px auto;padding:20px}
 
-    /* Nav */
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 6px;}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#b08b2e);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,0.6);}
-    .logo span{font-weight:700;color:#071014}
-    .brand h1{margin:0;font-size:18px;letter-spacing:0.4px}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
+  /* Nav */
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#b08b2e);display:flex;align-items:center;justify-content:center;color:#071014;font-weight:800;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+  .brand h1{margin:0;font-size:18px}
+  .brand p{margin:0;font-size:12px;color:var(--muted)}
+  .nav-links{display:flex;gap:12px;align-items:center}
+  .nav-links a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none}
+  .nav-links a.primary{background:transparent;border:1px solid rgba(212,175,55,0.12);color:var(--gold);font-weight:600}
 
-    .menu{display:flex;gap:14px;align-items:center}
-    .menu a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
-    .menu a.primary{background:transparent;border:1px solid rgba(212,175,55,0.12);color:var(--gold);font-weight:600}
-    .cta{background:var(--gold);color:#071014;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+  /* Hero (clean minimal) */
+  .hero{display:flex;align-items:center;gap:24px;margin-top:18px;padding:28px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid var(--glass)}
+  .hero-left{flex:1}
+  .hero h2{font-size:34px;margin:0;color:var(--gold)}
+  .hero p{color:var(--muted);margin-top:8px;margin-bottom:16px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    background:var(--gold);color:#071014;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:700;
+    box-shadow:0 6px 18px rgba(212,175,55,0.10);
+  }
+  .btn.secondary{background:transparent;color:var(--gold);border:1px solid rgba(212,175,55,0.12)}
 
-    /* Mobile menu button */
-    .mobile-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px}
+  /* Layout sections */
+  section{margin-top:28px}
+  .section-title{display:flex;align-items:center;gap:12px}
+  .section-title h3{margin:0;font-size:18px;color:var(--gold)}
+  .section-title p{margin:0;color:var(--muted);font-size:13px}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:14px}
-    .hero-card{background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));padding:26px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(2,6,8,0.6);border:1px solid var(--glass)}
+  /* Grid of cards */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px}
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+    border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.02);
+    transition:transform .28s ease, box-shadow .28s ease;
+    cursor:pointer;position:relative;overflow:hidden;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+  .card .title{font-weight:700;color:var(--gold);margin-bottom:8px}
+  .card .desc{color:var(--muted);font-size:13px}
+  .card .pill{position:absolute;right:12px;top:12px;padding:6px 10px;border-radius:999px;background:var(--accent);color:var(--gold);font-weight:700;font-size:12px}
 
-    .hero h2{margin:0;font-size:28px}
-    .hero p{color:var(--muted);margin-top:10px}
+  /* card hover glow */
+  .card:before{
+    content:"";position:absolute;left:-30%;top:-30%;width:160%;height:160%;background:radial-gradient(circle at 20% 20%, rgba(212,175,55,0.06), transparent 10%), radial-gradient(circle at 80% 80%, rgba(127,137,140,0.02), transparent 10%);opacity:0;transition:opacity .35s;
+  }
+  .card:hover:before{opacity:1}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
-    .card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-height:110px}
-    .card h3{margin:0 0 8px 0}
-    .card p{margin:0;color:var(--muted);font-size:13px}
-    .card a{display:inline-block;margin-top:12px;padding:8px 10px;border-radius:8px;text-decoration:none;border:1px solid rgba(212,175,55,0.08);color:var(--gold);font-weight:600}
+  /* responsive grids */
+  @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}.hero h2{font-size:28px}}
 
-    .tools-list{display:flex;flex-direction:column;gap:12px}
-    .tool-row{display:flex;align-items:center;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.01);border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-    .tool-row small{color:var(--muted)}
+  /* modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(2,4,5,0.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:999}
+  .modal{background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));max-width:920px;width:100%;border-radius:16px;padding:18px;border:1px solid var(--glass);box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+  .modal .close{float:right;background:transparent;border:none;color:var(--muted);font-size:18px}
+  .modal h4{margin:6px 0 12px 0;color:var(--gold)}
+  .modal-grid{display:grid;grid-template-columns:1fr 380px;gap:14px}
+  @media (max-width:880px){.modal-grid{grid-template-columns:1fr}}
 
-    /* Footer */
-    footer{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.02)}
+  /* fib UI inside modal (compact) */
+  .input{display:block;margin-bottom:8px}
+  .input label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+  .input input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(212,175,55,0.12);background:rgba(255,255,255,0.02);color:white}
 
-    /* Responsive */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:680px){
-      body{padding:16px}
-      .menu{display:none}
-      .mobile-toggle{display:block}
-      .grid{grid-template-columns:1fr}
-      .hero{gap:12px}
-    }
+  .calc-btn{background:var(--gold);color:#071014;padding:10px;border-radius:10px;border:none;font-weight:700;width:100%}
+  .levels{margin-top:12px;background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .level-row{display:flex;justify-content:space-between;padding:8px 4px;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .level-row:last-child{border-bottom:none}
+  .muted{color:var(--muted);font-size:13px}
 
-    /* Accent decorations */
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(212,175,55,0.12), rgba(111,122,127,0.06));color:var(--gold);font-weight:600}
+  /* scroll reveal helper */
+  .reveal{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+  .reveal.show{opacity:1;transform:none}
 
-  </style>
+  footer{margin-top:28px;padding:18px;border-radius:12px;display:flex;justify-content:space-between;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+</style>
 </head>
+
 <body>
   <div class="wrap">
 
+    <!-- NAV -->
     <nav class="nav">
       <div class="brand">
-        <div class="logo"><span>360</span></div>
+        <div class="logo">360</div>
         <div>
           <h1>360 Halal Hustlers Hub</h1>
-          <p>Halal trading, tools & digital hustles — build with barakah</p>
+          <p>Halal trading tools, strategies & education</p>
         </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="menu">
-          <a href="/">Home</a>
-          <a href="/forex/index.html">Forex</a>
-          <a href="/forex/tools/index.html">Forex Tools</a>
-          <a href="/about.html">About</a>
-        </div>
-        <button class="mobile-toggle" id="mobBtn">Menu</button>
+      <div class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="#strategies">Strategies</a>
+        <a href="#education">Education</a>
+        <a class="primary" href="#roadmap">Roadmap</a>
       </div>
     </nav>
 
-    <main>
-      <section class="hero-card hero">
-        <div>
-          <h2>Welcome to <span style="color:var(--gold)">360 Halal Hustlers</span></h2>
-          <p>Focus. Build. Grow. A halal-first hub for trading tools, practical strategies, and digital hustle resources. Start with Forex tools designed to fit a funded account workflow.</p>
+    <!-- HERO -->
+    <header class="hero" aria-hidden="false">
+      <div class="hero-left">
+        <h2>360 Halal Hustlers Hub</h2>
+        <p class="muted">Focus. Build. Grow. Start with the Forex tools you need to trade a funded account — all halal-first.</p>
+        <div class="hero-ctas">
+          <a class="btn" id="openFibBtn">Open Fibonacci Calculator</a>
+          <a class="btn secondary" href="#tools">Explore Tools</a>
+        </div>
+      </div>
 
-          <div class="grid" style="margin-top:20px">
-            <div class="card">
-              <h3>Forex</h3>
-              <p>Beginner lessons, strategies, and halal trading rules. Start with the Fibonacci strategy we use to trade funded accounts.</p>
-              <a href="/forex/index.html">Explore Forex</a>
-            </div>
-
-            <div class="card">
-              <h3>Forex Tools</h3>
-              <p>Handy calculators for position sizing, pip value, risk and our Pro Fibonacci tool.</p>
-              <a href="/forex/tools/index.html">Open Tools</a>
-            </div>
-
-            <div class="card">
-              <h3>Digital Hustles</h3>
-              <p>Future space for digital marketing, content, and productization. We'll scale here as your main hustle grows.</p>
-              <a href="/digital-hustles/index.html">Plan Growth</a>
-            </div>
-          </div>
-
-          <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
-            <a class="cta" href="/forex/tools/fib-calculator.html">Open Fibonacci Calculator</a>
-            <a class="badge" href="/forex/strategy/fibonacci-strategy.html">See Strategy Guide</a>
+      <div style="width:360px;min-height:140px;display:flex;align-items:center;justify-content:center;">
+        <!-- decorative branded panel -->
+        <div style="width:100%;height:100%;border-radius:12px;border:1px solid var(--glass);display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center">
+            <div style="font-size:22px;color:var(--gold);font-weight:800">Halal Hustle</div>
+            <div class="muted" style="font-size:13px;margin-top:6px">Trading tools • Strategy • Education</div>
           </div>
         </div>
+      </div>
+    </header>
 
-        <aside class="hero-card" style="padding:20px;">
-          <h3 style="margin-top:0">Quick Tools</h3>
-          <div class="tools-list">
-            <div class="tool-row">
-              <div>
-                <strong>Fibonacci Calculator</strong>
-                <div><small>Retracements & Extensions — pro version</small></div>
-              </div>
-              <div><a href="/forex/tools/fib-calculator.html">Open</a></div>
-            </div>
+    <!-- TOOLS -->
+    <section id="tools">
+      <div class="section-title">
+        <h3>Forex Tools</h3>
+        <p class="muted">Essential calculators and helpers for funded account trading.</p>
+      </div>
 
-            <div class="tool-row">
-              <div>
-                <strong>Position Size</strong>
-                <div><small>Calculate lot size for funded rules</small></div>
-              </div>
-              <div><a href="/forex/tools/position-size.html">Open</a></div>
-            </div>
-
-            <div class="tool-row">
-              <div>
-                <strong>Pip Calculator</strong>
-                <div><small>Pip values by pair & lot</small></div>
-              </div>
-              <div><a href="/forex/tools/pip-calculator.html">Open</a></div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">
-            <div><strong>Account:</strong> Aqua Funded — $1,000</div>
-            <div style="margin-top:8px"><strong>Focus:</strong> Fibonacci-only trade plan</div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- Sections to expand later -->
-      <section style="margin-top:22px">
-        <div class="hero-card">
-          <h3 style="margin:0 0 8px 0">Roadmap</h3>
-          <p style="color:var(--muted)">Planned features: Strategy guides, calculators, journal CSV export, annotated examples, and courses. Launch priority: Forex Tools → Strategy Library → Digital Hustles.</p>
-
-          <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
-            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);min-width:200px">
-              <strong>Phase 1</strong>
-              <div style="color:var(--muted)">Fibonacci Calculator (live), Strategy Guide, Journal CSV</div>
-            </div>
-            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);min-width:200px">
-              <strong>Phase 2</strong>
-              <div style="color:var(--muted)">Multiple Forex Tools, UI polish, analytics</div>
-            </div>
-            <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);min-width:200px">
-              <strong>Phase 3</strong>
-              <div style="color:var(--muted)">Digital Marketing & Products hub</div>
-            </div>
-          </div>
+      <div class="grid" style="margin-top:12px">
+        <!-- Fibonacci (opens modal with embedded calculator) -->
+        <div class="card reveal" data-action="open-fib">
+          <div class="pill">Pro</div>
+          <div class="title">Fibonacci Calculator</div>
+          <div class="desc">Retracements & extensions — full pro version embedded.</div>
         </div>
-      </section>
 
-    </main>
+        <div class="card reveal" data-action="open-placeholder" data-name="Pip Calculator">
+          <div class="title">Pip Calculator</div>
+          <div class="desc">Compute pip value for different pairs & lot sizes.</div>
+        </div>
+
+        <div class="card reveal" data-action="open-placeholder" data-name="Position Size">
+          <div class="title">Position Size</div>
+          <div class="desc">Calculate lot size using risk per trade and stop-loss pips.</div>
+        </div>
+
+        <div class="card reveal" data-action="open-placeholder" data-name="Risk Management">
+          <div class="title">Risk Management</div>
+          <div class="desc">Rules for funded account risk & daily limits.</div>
+        </div>
+
+        <div class="card reveal" data-action="open-placeholder" data-name="Lot Size">
+          <div class="title">Lot Size</div>
+          <div class="desc">Quick lot conversions for micro/mini/standard lots.</div>
+        </div>
+
+        <div class="card reveal" data-action="open-placeholder" data-name="Spread Calculator">
+          <div class="title">Spread Calculator</div>
+          <div class="desc">Estimate spread cost per trade and breakeven pips.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRATEGIES -->
+    <section id="strategies">
+      <div class="section-title" style="margin-top:28px">
+        <h3>Forex Strategies</h3>
+        <p class="muted">Practical strategy guides — trade one method, prove consistency.</p>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card reveal"><div class="title">Fibonacci Strategy</div><div class="desc">Pullback entries, TP at extensions, strict position sizing.</div></div>
+        <div class="card reveal"><div class="title">Market Structure</div><div class="desc">Identify trend, higher highs/lows, structure breaks.</div></div>
+        <div class="card reveal"><div class="title">Break & Retest</div><div class="desc">High probability retest entries on clear breaks.</div></div>
+        <div class="card reveal"><div class="title">Supply & Demand</div><div class="desc">Levels-based entries & confluence.</div></div>
+        <div class="card reveal"><div class="title">Smart Money</div><div class="desc">Institutional flow concepts for advanced traders.</div></div>
+        <div class="card reveal"><div class="title">Halal Rules</div><div class="desc">Guidelines for halal-first trading practices.</div></div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-title" style="margin-top:28px">
+        <h3>Forex Education</h3>
+        <p class="muted">Beginner lessons, psychology, terminology and halal rules.</p>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card reveal"><div class="title">Beginner Lessons</div><div class="desc">Start from scratch: basics & terminology.</div></div>
+        <div class="card reveal"><div class="title">Terminology</div><div class="desc">Glossary for pairs, pips, lots, swaps & more.</div></div>
+        <div class="card reveal"><div class="title">Psychology</div><div class="desc">Discipline, journaling & trade routine.</div></div>
+        <div class="card reveal"><div class="title">Risk Management</div><div class="desc">Edge protection for funded accounts.</div></div>
+        <div class="card reveal"><div class="title">Halal Trading Rules</div><div class="desc">Practical steps to keep your trading halal.</div></div>
+        <div class="card reveal"><div class="title">Journal CSV</div><div class="desc">Exportable trade journal for weekly review.</div></div>
+      </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap">
+      <div class="section-title" style="margin-top:28px">
+        <h3>Roadmap</h3>
+        <p class="muted">Phase 1: Tools & Strategy → Phase 2: UI polish & analytics → Phase 3: Digital Hustles</p>
+      </div>
+    </section>
 
     <footer>
-      <div>
-        <strong>360 Halal Hustlers</strong>
-        <div style="color:var(--muted);font-size:13px">Built for halal growth — trade, learn, & scale with barakah</div>
-      </div>
-      <div style="color:var(--muted);font-size:13px">© <span id="year"></span> • Made with focus</div>
+      <div>360 Halal Hustlers — Built with barakah</div>
+      <div class="muted">© <span id="year"></span></div>
     </footer>
-
   </div>
 
-  <script>
-    // small scripts
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- Modal (backdrop) -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" aria-modal="true">
+      <button id="modalClose" class="close">✕</button>
 
-    // Mobile menu quick toggle — simple progressive enhancement
-    const mobBtn = document.getElementById('mobBtn');
-    mobBtn && mobBtn.addEventListener('click', ()=>{
-      const menu = document.querySelector('.menu');
-      if(!menu) return;
-      if(getComputedStyle(menu).display === 'none'){
-        menu.style.display = 'flex';
-        menu.style.flexDirection = 'column';
-        menu.style.position = 'absolute';
-        menu.style.right = '16px';
-        menu.style.top = '74px';
-        menu.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))';
-        menu.style.padding = '12px';
-        menu.style.borderRadius = '12px';
-      } else {
-        menu.style.display = 'none';
-      }
-    });
-  </script>
+      <!-- dynamic modal content -->
+      <div id="modalContent">
+        <!-- Default placeholder; JS will inject the Fibonacci UI -->
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Utilities
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+  // Set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const reveals = $$('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    for(const e of entries){
+      if(e.isIntersecting) e.target.classList.add('show');
+    }
+  }, {threshold:0.18});
+  reveals.forEach(r => io.observe(r));
+
+  // Modal control
+  const backdrop = $('#modalBackdrop');
+  const modalContent = $('#modalContent');
+  const modalClose = $('#modalClose');
+
+  function openModal(html){
+    modalContent.innerHTML = html;
+    backdrop.style.display = 'flex';
+    backdrop.setAttribute('aria-hidden','false');
+    // trap scroll
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    backdrop.style.display = 'none';
+    backdrop.setAttribute('aria-hidden','true');
+    modalContent.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e)=>{ if(e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+  // Embed Premium Fibonacci Calculator (pro version) - same look but compact for modal
+  const fibHtml = `
+    <h4>Pro Fibonacci Calculator</h4>
+    <div class="modal-grid">
+      <div>
+        <div class="input"><label>Swing High</label><input id="fibHigh" type="number" placeholder="e.g. 1.20000"></div>
+        <div class="input"><label>Swing Low</label><input id="fibLow" type="number" placeholder="e.g. 1.18000"></div>
+        <button class="calc-btn" id="doFib">Generate Levels</button>
+
+        <div id="fibNotes" class="muted" style="margin-top:10px">Enter price values with same precision (e.g. 1.20000).</div>
+      </div>
+
+      <aside>
+        <div class="levels" id="fibResults">
+          <div class="muted">Results will appear here after calculation.</div>
+        </div>
+      </aside>
+    </div>
+  `;
+
+  function calcFibLevels(){
+    const high = parseFloat($('#fibHigh').value);
+    const low = parseFloat($('#fibLow').value);
+    if(isNaN(high) || isNaN(low) || high <= low){
+      $('#fibResults').innerHTML = '<div style="color:#ff6666">Enter valid high & low (high must be greater than low).</div>';
+      return;
+    }
+    const diff = high - low;
+    const retr = {
+      "0%": high,
+      "23.6%": high - diff * 0.236,
+      "38.2%": high - diff * 0.382,
+      "50.0%": high - diff * 0.5,
+      "61.8%": high - diff * 0.618,
+      "78.6%": high - diff * 0.786,
+      "100%": low
+    };
+    const ext = {
+      "1.272": low - diff * 0.272,
+      "1.618": low - diff * 0.618,
+      "2.0": low - diff * 1.0,
+      "2.618": low - diff * 1.618
+    };
+
+    let out = '<div><strong class="muted">Retracement Levels</strong>';
+    for(const k of Object.keys(retr)){
+      out += `<div class="level-row"><div>${k}</div><div>${retr[k].toFixed(5)}</div></div>`;
+    }
+    out += '</div><div style="margin-top:10px"><strong class="muted">Extension Levels</strong>';
+    for(const k of Object.keys(ext)){
+      out += `<div class="level-row"><div>${k}</div><div>${ext[k].toFixed(5)}</div></div>`;
+    }
+    out += '</div>';
+    $('#fibResults').innerHTML = out;
+  }
+
+  // Wire card clicks
+  document.addEventListener('click', (e)=>{
+    const card = e.target.closest('.card');
+    if(!card) return;
+    const action = card.dataset.action;
+    if(action === 'open-fib' || e.target.id === 'openFibBtn'){
+      openModal(fibHtml);
+      setTimeout(()=>{ // wait DOM injected
+        document.getElementById('doFib').addEventListener('click', calcFibLevels);
+      }, 40);
+      return;
+    }
+    if(action === 'open-placeholder'){
+      const name = card.dataset.name || card.querySelector('.title')?.textContent || 'Tool';
+      const content = \`
+        <h4>\${name}</h4>
+        <div style="display:grid;grid-template-columns:1fr;gap:12px">
+          <div class="muted">This tool will be built and available here. For now you can keep using the calculator modal or open dedicated pages later.</div>
+          <button class="calc-btn" onclick="closeModal()">Close</button>
+        </div>
+      \`;
+      openModal(content);
+      return;
+    }
+  });
+
+  // Also open from hero CTA
+  $('#openFibBtn').addEventListener('click', ()=>{
+    openModal(fibHtml);
+    setTimeout(()=>{ document.getElementById('doFib').addEventListener('click', calcFibLevels); }, 40);
+  });
+
+  // Small UX: hover/touch visual feedback for mobile (adds subtle elevation on touchstart)
+  $$('.card').forEach(c=>{
+    c.addEventListener('touchstart', ()=> c.classList.add('touching'));
+    c.addEventListener('touchend', ()=> c.classList.remove('touching'));
+    c.addEventListener('mousedown', ()=> c.classList.add('touching'));
+    c.addEventListener('mouseup', ()=> c.classList.remove('touching'));
+  });
+
+</script>
 </body>
 </html>
