@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fibonacci Calculator</title>
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.calc-box {
+    background: #111;
+    border: 1px solid gold;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 10px;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #000;
+    border-radius: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+    <h1>Fibonacci Calculator</h1>
+</header>
+
+<div class="calc-box">
+    <label>Swing High</label>
+    <input id="high" type="number">
+
+    <label>Swing Low</label>
+    <input id="low" type="number">
+
+    <button onclick="calculateFib()">Calculate</button>
+
+    <div id="results" class="result-box"></div>
+</div>
+
+<script>
+function calculateFib() {
+    let high = parseFloat(document.getElementById("high").value);
+    let low = parseFloat(document.getElementById("low").value);
+
+    if (isNaN(high) || isNaN(low)) {
+        alert("Enter numbers!");
+        return;
+    }
+
+    let diff = high - low;
+
+    let levels = {
+        "0.236": high - diff * 0.236,
+        "0.382": high - diff * 0.382,
+        "0.500": high - diff * 0.50,
+        "0.618": high - diff * 0.618,
+        "0.786": high - diff * 0.786
+    };
+
+    let html = "";
+    for (let key in levels) {
+        html += `<p><b>${key}</b> → ${levels[key].toFixed(3)}</p>`;
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
