@@ -1,0 +1,73 @@
+/* MAIN THEME */
+body {
+    margin: 0;
+    background: #0d0d0d;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.hero {
+    padding: 40px 20px;
+    text-align: center;
+    background: linear-gradient(120deg, #000, #111);
+    border-bottom: 1px solid gold;
+}
+
+.hero h1 {
+    font-size: 28px;
+    color: gold;
+}
+
+.hero p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* SECTION TITLE */
+.section-title {
+    margin: 30px 15px 10px;
+    font-size: 20px;
+    color: gold;
+}
+
+/* HORIZONTAL SCROLL */
+.scroll-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 15px;
+    scroll-snap-type: x mandatory;
+}
+
+.scroll-row::-webkit-scrollbar {
+    height: 6px;
+}
+
+.scroll-row::-webkit-scrollbar-thumb {
+    background: gold;
+    border-radius: 20px;
+}
+
+/* CARDS */
+.card {
+    min-width: 210px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 15px;
+    text-decoration: none;
+    color: white;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+    border-color: gold;
+    transform: scale(1.05);
+}
+
+.card.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
