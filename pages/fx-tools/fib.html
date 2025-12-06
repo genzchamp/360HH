@@ -1,94 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fibonacci Calculator</title>
-
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Pro Fibonacci Calculator — 360HH</title>
   <style>
-    body {
-      background: #070708;
-      color: #fff;
-      font-family: Inter, system-ui;
-      padding: 25px;
-    }
-
-    h1 {
-      color: #f0d44a;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 12px;
-      font-size: 14px;
-      color: #f0d44a;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      margin-top: 5px;
-      background: #111216;
-      color: #fff;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #f0d44a;
-      color: #000;
-      border: none;
-      margin-top: 20px;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .result-box {
-      margin-top: 20px;
-      background: #111216;
-      padding: 16px;
-      border-radius: 12px;
-    }
+    :root{--bg:#070708;--card:#0d0f10;--gold:#D4AF37;--muted:#9aa0a6;--radius:12px;font-family:Inter,system-ui}
+    html,body{height:100%;margin:0;background:transparent;color:#fff}
+    .wrap{padding:20px}
+    h1{color:var(--gold);margin:0 0 10px 0}
+    .panel{background:var(--card);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);max-width:920px}
+    label{display:block;color:var(--muted);margin-top:12px}
+    input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(212,175,55,0.08);background:rgba(255,255,255,0.02);color:#fff}
+    button{margin-top:12px;padding:10px;border-radius:8px;border:none;background:var(--gold);color:#071014;font-weight:700}
+    .levels{margin-top:12px;background:rgba(255,255,255,0.02);padding:10px;border-radius:8px}
+    .level{display:flex;justify-content:space-between;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .level:last-child{border-bottom:none}
   </style>
-
-  <script>
-    function calculateFib() {
-      let high = parseFloat(document.getElementById("high").value);
-      let low = parseFloat(document.getElementById("low").value);
-
-      if (isNaN(high) || isNaN(low)) {
-        alert("Enter valid numbers");
-        return;
-      }
-
-      let diff = high - low;
-
-      let r618 = high - diff * 0.618;
-      let r786 = high - diff * 0.786;
-
-      document.getElementById("results").innerHTML = `
-        <p>🟡 61.8%: ${r618.toFixed(3)}</p>
-        <p>🟡 78.6%: ${r786.toFixed(3)}</p>
-      `;
-    }
-  </script>
 </head>
-
 <body>
-  <h1>Fibonacci Calculator</h1>
+  <div class="wrap">
+    <div class="panel">
+      <h1>Pro Fibonacci Calculator</h1>
+      <div class="muted">Enter swing high & swing low. Retracements & extensions included.</div>
 
-  <label>Swing High</label>
-  <input id="high" type="number" placeholder="Enter High">
+      <label>Swing High</label>
+      <input id="fibHigh" type="number" placeholder="e.g. 1.20000">
 
-  <label>Swing Low</label>
-  <input id="low" type="number" placeholder="Enter Low">
+      <label>Swing Low</label>
+      <input id="fibLow" type="number" placeholder="e.g. 1.18000">
 
-  <button onclick="calculateFib()">Calculate</button>
+      <button id="doCalc">Generate Levels</button>
 
-  <div id="results" class="result-box"></div>
+      <div id="out" class="levels"><div class="muted">Results will appear here.</div></div>
+    </div>
+  </div>
 
+<script>
+document.getElementById('doCalc').addEventListener('click', ()=>{
+  const high = parseFloat(document.getElementById('fibHigh').value);
+  const low = parseFloat(document.getElementById('fibLow').value);
+  const out = document.getElementById('out');
+  if(isNaN(high) || isNaN(low) || high <= low){
+    out.innerHTML = '<div style="color:#ff6666">Enter valid high & low (high must be greater than low).</div>';
+    return;
+  }
+  const diff = high - low;
+  const retr = {
+    "0%": high,
+    "23.6%": high - diff * 0.236,
+    "38.2%": high - diff * 0.382,
+    "50.0%": high - diff * 0.5,
+    "61.8%": high - diff * 0.618,
+    "78.6%": high - diff * 0.786,
+    "100%": low
+  };
+  const ext = {
+    "1.272": low - diff * 0.272,
+    "1.618": low - diff * 0.618,
+    "2.0": low - diff * 1.0,
+    "2.618": low - diff * 1.618
+  };
+  let html = '<div><strong class="muted">Retracements</strong>';
+  Object.keys(retr).forEach(k => { html += `<div class="level"><div>${k}</div><div>${retr[k].toFixed(5)}</div></div>`; });
+  html += '</div><div style="margin-top:10px"><strong class="muted">Extensions</strong>';
+  Object.keys(ext).forEach(k => { html += `<div class="level"><div>${k}</div><div>${ext[k].toFixed(5)}</div></div>`; });
+  html += '</div>';
+  out.innerHTML = html;
+});
+</script>
 </body>
 </html>
