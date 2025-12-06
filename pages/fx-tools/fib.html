@@ -1,1 +1,94 @@
-<h1 style="color:white">Fibonacci Calculator Loaded Successfully</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci Calculator</title>
+
+  <style>
+    body {
+      background: #070708;
+      color: #fff;
+      font-family: Inter, system-ui;
+      padding: 25px;
+    }
+
+    h1 {
+      color: #f0d44a;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #f0d44a;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 5px;
+      background: #111216;
+      color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #f0d44a;
+      color: #000;
+      border: none;
+      margin-top: 20px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      background: #111216;
+      padding: 16px;
+      border-radius: 12px;
+    }
+  </style>
+
+  <script>
+    function calculateFib() {
+      let high = parseFloat(document.getElementById("high").value);
+      let low = parseFloat(document.getElementById("low").value);
+
+      if (isNaN(high) || isNaN(low)) {
+        alert("Enter valid numbers");
+        return;
+      }
+
+      let diff = high - low;
+
+      let r618 = high - diff * 0.618;
+      let r786 = high - diff * 0.786;
+
+      document.getElementById("results").innerHTML = `
+        <p>🟡 61.8%: ${r618.toFixed(3)}</p>
+        <p>🟡 78.6%: ${r786.toFixed(3)}</p>
+      `;
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Fibonacci Calculator</h1>
+
+  <label>Swing High</label>
+  <input id="high" type="number" placeholder="Enter High">
+
+  <label>Swing Low</label>
+  <input id="low" type="number" placeholder="Enter Low">
+
+  <button onclick="calculateFib()">Calculate</button>
+
+  <div id="results" class="result-box"></div>
+
+</body>
+</html>
