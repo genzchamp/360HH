@@ -1,3 +1,92 @@
-<h1>Risk Calculator</h1>
-<p>This tool is active.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Calculator | 360HH</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
 
+<header class="header">
+  <h1>Risk Calculator</h1>
+  <p>Calculate correct lot size — trade disciplined.</p>
+</header>
+
+<main class="container">
+
+  <div class="card">
+    <label>Account Balance ($)</label>
+    <input type="number" id="balance" placeholder="e.g. 10000">
+
+    <label>Risk Percentage (%)</label>
+    <input type="number" id="riskPercent" placeholder="e.g. 1">
+
+    <label>Stop Loss (pips)</label>
+    <input type="number" id="stopLoss" placeholder="e.g. 20">
+
+    <label>Instrument</label>
+    <select id="instrument">
+      <option value="forex">Forex (EURUSD etc.)</option>
+      <option value="jpy">JPY Pairs</option>
+      <option value="xau">XAUUSD (Gold)</option>
+      <option value="btc">BTCUSD (Bitcoin)</option>
+    </select>
+
+    <button onclick="calculateRisk()" class="btn-primary">
+      Calculate Lot Size
+    </button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>360 Halal Hustlers Hub • Risk management first</p>
+</footer>
+
+<script>
+function calculateRisk(){
+  const balance = parseFloat(document.getElementById("balance").value);
+  const riskPercent = parseFloat(document.getElementById("riskPercent").value);
+  const stopLoss = parseFloat(document.getElementById("stopLoss").value);
+  const instrument = document.getElementById("instrument").value;
+
+  if(
+    isNaN(balance) || isNaN(riskPercent) ||
+    isNaN(stopLoss) || balance <= 0 ||
+    riskPercent <= 0 || stopLoss <= 0
+  ){
+    alert("Please enter valid values");
+    return;
+  }
+
+  const riskAmount = balance * (riskPercent / 100);
+
+  let pipValuePerLot = 0;
+
+  if(instrument === "forex"){
+    pipValuePerLot = 10;
+  }
+  else if(instrument === "jpy"){
+    pipValuePerLot = 9.1;
+  }
+  else if(instrument === "xau"){
+    pipValuePerLot = 1;
+  }
+  else if(instrument === "btc"){
+    pipValuePerLot = 0.01;
+  }
+
+  const lotSize = riskAmount / (stopLoss * pipValuePerLot);
+
+  document.getElementById("result").innerHTML = `
+    <strong>Risk Amount:</strong> $${riskAmount.toFixed(2)}<br>
+    <strong>Recommended Lot Size:</strong> ${lotSize.toFixed(2)} lots
+  `;
+}
+</script>
+
+</body>
+</html>
