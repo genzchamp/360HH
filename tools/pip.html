@@ -112,9 +112,12 @@
   <div class="card">
     <label>Currency Pair</label>
     <select id="pair">
-      <option value="0.0001">EURUSD / GBPUSD / AUDUSD</option>
-      <option value="0.01">USDJPY / EURJPY / GBPJPY</option>
-    </select>
+  <option value="forex">Forex (EURUSD, GBPUSD etc.)</option>
+  <option value="jpy">JPY Pairs (USDJPY, GBPJPY)</option>
+  <option value="xau">XAUUSD (Gold)</option>
+  <option value="btc">BTCUSD (Bitcoin)</option>
+</select>
+
 
     <label>Lot Size</label>
     <input type="number" id="lot" step="0.01" placeholder="e.g. 0.10" />
@@ -128,26 +131,38 @@
     <a href="../index.html">← Back to Dashboard</a>
   </div>
 </div>
-
 <script>
-  function calculatePip(){
-    const pip = parseFloat(document.getElementById("pair").value);
-    const lot = parseFloat(document.getElementById("lot").value);
+function calculatePip(){
+  const pair = document.getElementById("pair").value;
+  const lot = parseFloat(document.getElementById("lot").value);
 
-    if(isNaN(lot) || lot <= 0){
-      alert("Enter a valid lot size");
-      return;
-    }
-
-    // Standard: 1 lot = $10 per pip for non-JPY
-    let pipValue = pip === 0.0001 ? 10 * lot : 9.1 * lot;
-
-    document.getElementById("result").textContent =
-      `Pip Value ≈ $${pipValue.toFixed(2)} per pip`;
-
-    document.getElementById("result").style.display = "block";
+  if(isNaN(lot) || lot <= 0){
+    alert("Enter a valid lot size");
+    return;
   }
+
+  let pipValue = 0;
+
+  if(pair === "forex"){
+    pipValue = 10 * lot;
+  }
+  else if(pair === "jpy"){
+    pipValue = 9.1 * lot;
+  }
+  else if(pair === "xau"){
+    pipValue = 1 * lot; // $1 per point per lot (standard)
+  }
+  else if(pair === "btc"){
+    pipValue = 0.01 * lot; // broker-typical estimate
+  }
+
+  document.getElementById("result").textContent =
+    `Pip Value ≈ $${pipValue.toFixed(2)} per point`;
+
+  document.getElementById("result").style.display = "block";
+}
 </script>
+
 
 </body>
 </html>
