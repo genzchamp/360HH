@@ -1,130 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>360 Halal Hustlers Hub — Dashboard</title>
-  <meta name="description" content="360 Halal Hustlers — halal-first trading tools, strategies & education." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>360 Halal Hustlers Hub</title>
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <div class="brand">
-        <div class="logo">360</div>
-        <div class="brand-text">
-          <h1>360 Halal Hustlers</h1>
-          <small class="muted">Halal trading tools • Strategy • Education</small>
-        </div>
-      </div>
-      <nav class="nav-links">
-        <a href="#tools">Tools</a>
-        <a href="#strategies">Strategies</a>
-        <a href="#education">Education</a>
-      </nav>
+
+<header class="header">
+  <h1>360 Halal Hustlers Hub</h1>
+  <p>Halal Trading Tools • Strategy • Education</p>
+</header>
+
+<main class="container">
+
+  <!-- TOOLS -->
+  <section>
+    <h2>Forex Tools</h2>
+    <div class="grid">
+      <a href="./tools/fib.html" class="card">Fibonacci Calculator</a>
+      <a href="./tools/pip.html" class="card">Pip Calculator</a>
+      <a href="./tools/risk.html" class="card">Risk Calculator</a>
+      <a href="./tools/spread.html" class="card">Spread Calculator</a>
+      <a href="./tools/journal.html" class="card">Trade Journal</a>
     </div>
-  </header>
+  </section>
 
-  <main id="main">
-    <section class="hero container">
-      <div class="hero-left">
-        <h2>Focus. Build. Grow.</h2>
-        <p class="muted">Premium halal-first hub for funded account trading — start with tools and one disciplined strategy.</p>
-        <div class="hero-ctas">
-          <button id="openFibHero" class="btn-primary">Open Fibonacci Calculator</button>
-          <a href="#tools" class="btn-ghost">Browse Tools</a>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="stat-card">
-          <div class="stat-title">Aqua Funded</div>
-          <div class="stat-value">$1,000</div>
-          <div class="stat-sub muted">Trading focus: Fibonacci-only</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tools -->
-    <section id="tools" class="section container">
-      <div class="section-head">
-        <h3>Forex Tools</h3>
-        <p class="muted">Swipe horizontally or use the arrows. Tap a card to open the tool.</p>
-      </div>
-
-      <div class="carousel-wrap">
-        <button class="carousel-nav prev" data-target="tools">&larr;</button>
-        <div class="carousel" id="tools-carousel" role="list">
-          <article class="card reveal" role="listitem" data-href="pages/fx-tools/fib.html">
-            <div class="icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 20v-6h4v6H4zM10 20V4h4v16h-4zM16 20v-10h4v10h-4z" fill="#D4AF37"/></svg></div>
-            <h4>Fibonacci Calculator</h4>
-            <p class="muted">Retracements & extensions — Pro version.</p>
-            <div class="tag">Tool</div>
-          </article>
-
-          <article class="card reveal disabled">
-            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20" stroke="#D4AF37" stroke-width="1.6"/></svg></div>
-            <h4>Pip Calculator</h4><p class="muted">Coming soon</p><div class="tag">Soon</div>
-          </article>
-        </div>
-        <button class="carousel-nav next" data-target="tools">&rarr;</button>
-      </div>
-    </section>
-
-    <!-- Strategies -->
-    <section id="strategies" class="section container">
-      <div class="section-head">
-        <h3>Forex Strategies</h3>
-        <p class="muted">One method at a time — keep it simple.</p>
-      </div>
-
-      <div class="carousel-wrap">
-        <button class="carousel-nav prev" data-target="strategies">&larr;</button>
-        <div class="carousel" id="strategies-carousel" role="list">
-          <article class="card reveal"><h4>Fibonacci Strategy</h4><p class="muted">Pullback entries → TP at extensions.</p></article>
-          <article class="card reveal"><h4>Support & Resistance</h4><p class="muted">High-probability levels.</p></article>
-        </div>
-        <button class="carousel-nav next" data-target="strategies">&rarr;</button>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education" class="section container">
-      <div class="section-head">
-        <h3>Education</h3>
-        <p class="muted">Lessons, psychology and funded-account rules.</p>
-      </div>
-
-      <div class="carousel-wrap">
-        <button class="carousel-nav prev" data-target="education">&larr;</button>
-        <div class="carousel" id="education-carousel" role="list">
-          <article class="card reveal"><h4>Forex Basics</h4><p class="muted">Pairs, pips, lots & sessions.</p></article>
-          <article class="card reveal"><h4>Candlestick Patterns</h4><p class="muted">Rejections, engulfings, pins.</p></article>
-        </div>
-        <button class="carousel-nav next" data-target="education">&rarr;</button>
-      </div>
-    </section>
-
-    <section id="roadmap" class="section container">
-      <div class="section-head">
-        <h3>Roadmap</h3>
-        <p class="muted">Phase 1: Tools & Strategy → Phase 2: UI polish & analytics → Phase 3: Digital Hustles</p>
-      </div>
-    </section>
-
-    <footer class="site-footer container">
-      <div>360 Halal Hustlers — Built with barakah</div>
-      <div class="muted">© <span id="year"></span></div>
-    </footer>
-  </main>
-
-  <!-- Modal iframe -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-inner">
-      <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
-      <iframe id="toolFrame" src="" title="Tool" frameborder="0"></iframe>
+  <!-- STRATEGY -->
+  <section>
+    <h2>Forex Strategy</h2>
+    <div class="grid">
+      <div class="card static">Market Structure</div>
+      <div class="card static">Liquidity Zones</div>
+      <div class="card static">Order Blocks</div>
+      <div class="card static">Break of Structure</div>
+      <div class="card static">ChoCH</div>
     </div>
-  </div>
+  </section>
 
-  <script src="./assets/js/app.js" defer></script>
+  <!-- EDUCATION -->
+  <section>
+    <h2>Education</h2>
+    <div class="grid">
+      <div class="card static">Forex Basics</div>
+      <div class="card static">Candlestick Patterns</div>
+      <div class="card static">Trading Sessions</div>
+      <div class="card static">Psychology</div>
+      <div class="card static">Funded Accounts</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Built with barakah • © 360 Halal Hustlers</p>
+</footer>
+
 </body>
 </html>
