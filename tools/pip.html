@@ -1,3 +1,153 @@
-<h1>Pip Calculator</h1>
-<p>This tool is active.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pip Calculator — 360HH</title>
 
+  <style>
+    :root{
+      --bg:#070708;
+      --card:#0f1112;
+      --gold:#D4AF37;
+      --text:#ffffff;
+      --muted:#9aa0a6;
+      --radius:12px;
+    }
+
+    *{box-sizing:border-box;font-family:system-ui,Inter}
+
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#050506);
+      color:var(--text);
+      padding:20px;
+    }
+
+    .wrap{
+      max-width:720px;
+      margin:auto;
+    }
+
+    h1{
+      color:var(--gold);
+      text-align:center;
+      margin-bottom:8px;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:20px;
+      font-size:14px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    label{
+      font-size:13px;
+      color:var(--muted);
+      display:block;
+      margin-top:12px;
+    }
+
+    select,input{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:#000;
+      color:#fff;
+      font-size:14px;
+      margin-top:6px;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      background:var(--gold);
+      color:#071014;
+      font-weight:800;
+      cursor:pointer;
+      margin-top:16px;
+    }
+
+    .result{
+      margin-top:16px;
+      padding:14px;
+      border-radius:10px;
+      background:rgba(212,175,55,0.08);
+      border:1px solid rgba(212,175,55,0.25);
+      color:var(--gold);
+      font-weight:800;
+      text-align:center;
+      display:none;
+    }
+
+    .back{
+      margin-top:18px;
+      text-align:center;
+    }
+
+    .back a{
+      color:var(--gold);
+      text-decoration:none;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Pip Calculator</h1>
+  <div class="subtitle">Know your pip value before every trade</div>
+
+  <div class="card">
+    <label>Currency Pair</label>
+    <select id="pair">
+      <option value="0.0001">EURUSD / GBPUSD / AUDUSD</option>
+      <option value="0.01">USDJPY / EURJPY / GBPJPY</option>
+    </select>
+
+    <label>Lot Size</label>
+    <input type="number" id="lot" step="0.01" placeholder="e.g. 0.10" />
+
+    <button onclick="calculatePip()">Calculate Pip Value</button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <div class="back">
+    <a href="../index.html">← Back to Dashboard</a>
+  </div>
+</div>
+
+<script>
+  function calculatePip(){
+    const pip = parseFloat(document.getElementById("pair").value);
+    const lot = parseFloat(document.getElementById("lot").value);
+
+    if(isNaN(lot) || lot <= 0){
+      alert("Enter a valid lot size");
+      return;
+    }
+
+    // Standard: 1 lot = $10 per pip for non-JPY
+    let pipValue = pip === 0.0001 ? 10 * lot : 9.1 * lot;
+
+    document.getElementById("result").textContent =
+      `Pip Value ≈ $${pipValue.toFixed(2)} per pip`;
+
+    document.getElementById("result").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
