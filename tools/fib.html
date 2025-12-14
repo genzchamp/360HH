@@ -1,13 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Fibonacci Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fibonacci Calculator — 360HH</title>
+
+  <style>
+    :root{
+      --bg:#070708;
+      --card:#0f1112;
+      --gold:#D4AF37;
+      --text:#ffffff;
+      --muted:#9aa0a6;
+      --radius:12px;
+    }
+
+    *{box-sizing:border-box;font-family:system-ui,Inter}
+
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#050506);
+      color:var(--text);
+      padding:20px;
+    }
+
+    .wrap{
+      max-width:720px;
+      margin:auto;
+    }
+
+    h1{
+      color:var(--gold);
+      text-align:center;
+      margin-bottom:8px;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:20px;
+      font-size:14px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .inputs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    label{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    input{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:#000;
+      color:#fff;
+      font-size:14px;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      background:var(--gold);
+      color:#071014;
+      font-weight:800;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:16px;
+      font-size:14px;
+    }
+
+    th,td{
+      padding:10px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      text-align:left;
+    }
+
+    th{
+      color:var(--gold);
+      font-weight:700;
+    }
+
+    .bias{
+      margin-top:16px;
+      padding:12px;
+      border-radius:10px;
+      background:rgba(212,175,55,0.08);
+      border:1px solid rgba(212,175,55,0.25);
+      color:var(--gold);
+      font-weight:700;
+      text-align:center;
+    }
+
+    .back{
+      margin-top:18px;
+      text-align:center;
+    }
+
+    .back a{
+      color:var(--gold);
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    @media(max-width:600px){
+      .inputs{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
+
+<div class="wrap">
   <h1>Fibonacci Calculator</h1>
-  <p>Swing High:</p>
-  <input type="number">
-  <p>Swing Low:</p>
-  <input type="number">
+  <div class="subtitle">Pro pullback & extension levels — funded-account friendly</div>
+
+  <div class="card">
+    <div class="inputs">
+      <div>
+        <label>Swing High</label>
+        <input type="number" id="high" placeholder="e.g. 1.2500" />
+      </div>
+      <div>
+        <label>Swing Low</label>
+        <input type="number" id="low" placeholder="e.g. 1.2300" />
+      </div>
+    </div>
+
+    <button onclick="calculateFib()">Calculate Levels</button>
+
+    <table id="result" style="display:none">
+      <thead>
+        <tr>
+          <th>Level</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody id="levels"></tbody>
+    </table>
+
+    <div id="bias" class="bias" style="display:none"></div>
+  </div>
+
+  <div class="back">
+    <a href="../index.html">← Back to Dashboard</a>
+  </div>
+</div>
+
+<script>
+  function calculateFib(){
+    const high = parseFloat(document.getElementById("high").value);
+    const low  = parseFloat(document.getElementById("low").value);
+
+    if(isNaN(high) || isNaN(low) || high === low){
+      alert("Enter valid swing high and low");
+      return;
+    }
+
+    const range = high - low;
+    const levels = [
+      ["0.382", high - range * 0.382],
+      ["0.5",   high - range * 0.5],
+      ["0.618", high - range * 0.618],
+      ["0.786", high - range * 0.786],
+      ["1.272", high + range * 0.272],
+      ["1.618", high + range * 0.618],
+    ];
+
+    const tbody = document.getElementById("levels");
+    tbody.innerHTML = "";
+
+    levels.forEach(l=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${l[0]}</td><td>${l[1].toFixed(5)}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById("result").style.display="table";
+
+    const bias = document.getElementById("bias");
+    bias.textContent = high > low
+      ? "📈 Bias: Bullish — wait for pullback → buy continuation"
+      : "📉 Bias: Bearish — wait for pullback → sell continuation";
+    bias.style.display="block";
+  }
+</script>
+
 </body>
 </html>
