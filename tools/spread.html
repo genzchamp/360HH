@@ -1,3 +1,84 @@
-<h1>Spread Calculator</h1>
-<p>This tool is active.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spread Calculator | 360HH</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
 
+<header class="header">
+  <h1>Spread Calculator</h1>
+  <p>Know the real cost before entering a trade.</p>
+</header>
+
+<main class="container">
+
+  <div class="card">
+    <label>Spread (points)</label>
+    <input type="number" id="spread" placeholder="e.g. 12">
+
+    <label>Lot Size</label>
+    <input type="number" id="lot" placeholder="e.g. 0.50">
+
+    <label>Instrument</label>
+    <select id="instrument">
+      <option value="forex">Forex (EURUSD etc.)</option>
+      <option value="jpy">JPY Pairs</option>
+      <option value="xau">XAUUSD (Gold)</option>
+      <option value="btc">BTCUSD (Bitcoin)</option>
+    </select>
+
+    <button onclick="calculateSpread()" class="btn-primary">
+      Calculate Spread Cost
+    </button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>360 Halal Hustlers Hub • Precision matters</p>
+</footer>
+
+<script>
+function calculateSpread(){
+  const spread = parseFloat(document.getElementById("spread").value);
+  const lot = parseFloat(document.getElementById("lot").value);
+  const instrument = document.getElementById("instrument").value;
+
+  if(
+    isNaN(spread) || isNaN(lot) ||
+    spread <= 0 || lot <= 0
+  ){
+    alert("Please enter valid values");
+    return;
+  }
+
+  let pointValue = 0;
+
+  if(instrument === "forex"){
+    pointValue = 0.10;
+  }
+  else if(instrument === "jpy"){
+    pointValue = 0.09;
+  }
+  else if(instrument === "xau"){
+    pointValue = 0.01;
+  }
+  else if(instrument === "btc"){
+    pointValue = 0.001;
+  }
+
+  const cost = spread * pointValue * lot;
+
+  document.getElementById("result").innerHTML = `
+    <strong>Spread Cost:</strong> $${cost.toFixed(2)}
+  `;
+}
+</script>
+
+</body>
+</html>
