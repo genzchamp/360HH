@@ -1,3 +1,94 @@
-<h1>Trade Journal</h1>
-<p>This tool is active.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trade Journal | 360HH</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
 
+<header class="header">
+  <h1>Trade Journal</h1>
+  <p>Consistency before profits.</p>
+</header>
+
+<main class="container">
+
+  <div class="card">
+    <label>Pair / Asset</label>
+    <input type="text" id="pair" placeholder="EURUSD / XAUUSD / BTCUSD">
+
+    <label>Direction</label>
+    <select id="direction">
+      <option>Buy</option>
+      <option>Sell</option>
+    </select>
+
+    <label>Risk (%)</label>
+    <input type="number" id="risk" placeholder="e.g. 1">
+
+    <label>Result (R)</label>
+    <input type="number" id="resultR" placeholder="e.g. 2 or -1">
+
+    <label>Notes</label>
+    <textarea id="notes" placeholder="Setup, emotions, mistakes..."></textarea>
+
+    <button onclick="saveTrade()" class="btn-primary">
+      Save Trade
+    </button>
+  </div>
+
+  <h2 style="margin-top:30px">Trade History</h2>
+  <div id="history"></div>
+
+</main>
+
+<footer class="footer">
+  <p>360 Halal Hustlers Hub • Discipline is wealth</p>
+</footer>
+
+<script>
+const historyDiv = document.getElementById("history");
+
+function loadTrades(){
+  const trades = JSON.parse(localStorage.getItem("trades")) || [];
+  historyDiv.innerHTML = "";
+
+  trades.forEach((t, i) => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <strong>${t.pair}</strong> — ${t.direction}<br>
+      Risk: ${t.risk}% | Result: ${t.result}R<br>
+      <small>${t.notes}</small>
+    `;
+    historyDiv.appendChild(div);
+  });
+}
+
+function saveTrade(){
+  const pair = document.getElementById("pair").value;
+  const direction = document.getElementById("direction").value;
+  const risk = document.getElementById("risk").value;
+  const result = document.getElementById("resultR").value;
+  const notes = document.getElementById("notes").value;
+
+  if(!pair || !risk || !result){
+    alert("Please fill required fields");
+    return;
+  }
+
+  const trades = JSON.parse(localStorage.getItem("trades")) || [];
+  trades.unshift({ pair, direction, risk, result, notes });
+  localStorage.setItem("trades", JSON.stringify(trades));
+
+  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+  loadTrades();
+}
+
+loadTrades();
+</script>
+
+</body>
+</html>
