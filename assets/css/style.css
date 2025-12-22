@@ -146,3 +146,79 @@ section h2::before {
     font-size: 18px;
   }
 }
+/* ===== PREMIUM UI POLISH ===== */
+
+h1, h2 {
+  letter-spacing: 0.5px;
+}
+
+section {
+  margin-bottom: 48px;
+}
+
+section h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: var(--gold);
+}
+
+/* Grid improvement */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+/* Card polish */
+.card {
+  background: linear-gradient(180deg, #0f1112, #0b0c0d);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold glow on hover */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.25);
+  border-color: var(--gold);
+}
+
+/* Icon support */
+.card::before {
+  content: "✦";
+  display: block;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+/* Static cards (non-clickable) */
+.card.static {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.card.static:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(212, 175, 55, 0.15);
+}
+
+/* Footer polish */
+.footer {
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
