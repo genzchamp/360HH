@@ -2,6 +2,25 @@ const menu=document.querySelector(".menu-toggle"),nav=document.querySelector(".n
 if(menu&&nav){menu.addEventListener("click",()=>{const open=nav.classList.toggle("open");menu.setAttribute("aria-expanded",open)})}
 const year=document.getElementById("year");if(year)year.textContent=new Date().getFullYear();
 
+async function buildLiveSearchIndex(){
+ try{
+  const pages=["index.html","learn.html","tools.html","shariah.html","resources.html","about.html"];
+  const live=[];
+  for(const page of pages){
+   const res=await fetch("./"+page,{cache:"no-store"}); if(!res.ok) continue;
+   const html=await res.text(),doc=new DOMParser().parseFromString(html,"text/html");
+   doc.querySelectorAll("main h1,main h2,main h3,main .calculator,main .content-card").forEach(el=>{
+    const title=(el.matches("h1,h2,h3")?el.textContent:el.querySelector("h2,h3")?.textContent||"").trim();
+    if(!title) return;
+    let node=el, parts=[];
+    for(let i=0;i<4&&node;i++,node=node.parentElement){const t=node.textContent?.replace(/\s+/g," ").trim();if(t)parts.push(t.slice(0,220));}
+    const target=el.closest("[id]")?.id||"";
+    live.push({title,page:page+(target?"#"+target:""),type:page.replace(".html",""),text:parts.join(" ")});
+   });
+  }
+  return live;
+ }catch(e){return []}
+}
 const SEARCH_INDEX=[
 {title:"Stocks",page:"learn.html#stocks",type:"Learn",text:"shares ownership dividends financial statements valuation orders execution Shariah stock screening AAOIFI Standard 21"},
 {title:"Crypto",page:"learn.html#crypto",type:"Learn",text:"blockchain coins tokens wallets private keys custody tokenomics staking lending yield Bitcoin Ethereum digital currency research IIFA"},
@@ -34,10 +53,10 @@ function openSiteSearch(){
  if(modal){modal.classList.add("open");setTimeout(()=>modal.querySelector("input")?.focus(),40);return}
  modal=document.createElement("div");modal.className="site-search";modal.innerHTML='<div class="search-backdrop" data-search-close></div><section class="search-dialog" role="dialog" aria-modal="true" aria-label="Search 360HH"><div class="search-head"><span class="kicker">360HH SEARCH</span><button class="search-close" type="button" aria-label="Close search">×</button></div><div class="search-input-wrap"><span>⌕</span><input type="search" placeholder="Search stocks, crypto, riba, risk, tools..." autocomplete="off"></div><div class="search-results" aria-live="polite"><div class="search-empty">Start typing to search the 360HH knowledge hub.</div></div></section>';
  document.body.appendChild(modal);modal.classList.add("open");
- const input=modal.querySelector("input"),results=modal.querySelector(".search-results");
+ const input=modal.querySelector("input"),results=modal.querySelector(".search-results"); let liveIndex=[]; buildLiveSearchIndex().then(x=>{liveIndex=x});
  const close=()=>modal.classList.remove("open");modal.querySelector(".search-close").onclick=close;modal.querySelector("[data-search-close]").onclick=close;
  const run=()=>{const q=input.value.trim().toLowerCase();if(!q){results.innerHTML='<div class="search-empty">Start typing to search the 360HH knowledge hub.</div>';return}
- const terms=q.split(/\s+/).filter(Boolean);const ranked=SEARCH_INDEX.map(item=>{const hay=(item.title+" "+item.type+" "+item.text).toLowerCase();let score=0;terms.forEach(t=>{if(item.title.toLowerCase().includes(t))score+=5;if(hay.includes(t))score+=2});return {...item,score}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,10);
+ const terms=q.split(/\s+/).filter(Boolean);const source=[...SEARCH_INDEX,...liveIndex];const ranked=source.map(item=>{const hay=(item.title+" "+item.type+" "+item.text).toLowerCase();let score=0;terms.forEach(t=>{if(item.title.toLowerCase().includes(t))score+=5;if(hay.includes(t))score+=2});return {...item,score}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,10);
  results.innerHTML=ranked.length?ranked.map(x=>'<a class="search-result" href="./'+x.page+'"><span class="search-type">'+x.type+'</span><strong>'+x.title+'</strong><small>'+x.text+'</small><b>Open →</b></a>').join(""):'<div class="search-empty">No matching topic found. Try a broader term like “stock”, “crypto”, “riba”, “risk” or “security”.</div>'};
  input.addEventListener("input",run);input.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
 }
