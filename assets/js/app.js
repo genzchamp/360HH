@@ -35,7 +35,7 @@ const SEARCH_INDEX=[
 {title:"Crypto Shariah",page:"shariah.html#crypto-shariah",type:"Shariah",text:"digital currencies cryptocurrency Bitcoin crypto assets IIFA Resolution 237 scholarly disagreement"},
 {title:"Financial Products",page:"shariah.html#products",type:"Shariah",text:"margin leverage short selling derivatives futures options CFDs staking yield lending contracts"},
 {title:"Governance",page:"shariah.html#governance",type:"Shariah",text:"primary sources Qur'an Sunnah AAOIFI IIFA attribution methodology date scholar review"},
-{title:"Position Size Calculator",page:"tools.html",type:"Tool",text:"capital risk percentage entry stop price position size risk budget calculator"},
+{title:"Shariah Research Engine",page:"shariah-engine.html",type:"Tool",text:"research stock crypto token company Shariah screening business activity financial structure transaction mechanics Islamic finance"} ,{title:"Position Size Calculator",page:"tools.html",type:"Tool",text:"capital risk percentage entry stop price position size risk budget calculator"},
 {title:"Compound Growth Calculator",page:"tools.html",type:"Tool",text:"starting amount contribution annual growth assumption years mathematical scenario"},
 {title:"Risk Reward Calculator",page:"tools.html",type:"Tool",text:"entry stop target reward risk ratio analysis"},
 {title:"Halal Stock Investing Guide",page:"resources.html",type:"Resource",text:"stock investing screening research workflow portfolio planning"},
