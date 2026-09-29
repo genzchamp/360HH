@@ -3,7 +3,7 @@
 <meta name="description" content="360HH detailed Shariah learning framework for riba, gharar, maysir, business activities, crypto, products and governance.">
 <title>Shariah Framework — 360HH</title><link rel="stylesheet" href="./assets/css/style.css"></head>
 <body>
-<header class="site-header"><a class="brand" href="./index.html"><span>360</span>HH</a><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button><nav class="nav"><a href="./index.html">Home</a><a href="./learn.html">Learn</a><a href="./tools.html">Tools</a><a class="active" href="./shariah.html">Shariah</a><a href="./resources.html">Resources</a><a href="./about.html">About</a></nav></header>
+<header class="site-header"><a class="brand" href="./index.html"><img src="./assets/brand/360hh-logo.svg" alt="360 Halal Hustlers"><span class="brand-text"><b>360</b><small>HALAL HUSTLERS</small></span></a><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button><nav class="nav"><a href="./index.html">Home</a><a href="./learn.html">Learn</a><a href="./tools.html">Tools</a><a class="active" href="./shariah.html">Shariah</a><a href="./resources.html">Resources</a><a href="./about.html">About</a></nav></header>
 <main>
 <section class="container page-hero"><span class="kicker">SHARIAH FRAMEWORK</span><h1>Principles first. Evidence first. Humility always.</h1><p>Select a subject. The complete lesson appears below without leaving the page. Sources are shown so readers can verify the evidence themselves.</p></section>
 <section class="container topic-nav" aria-label="Shariah topics">
@@ -43,7 +43,7 @@
 </section>
 <section class="container section"><div class="notice"><strong>Educational boundary:</strong> This framework is not a personal fatwa, investment recommendation or certification of any asset. The safest approach when the facts or scholarly evidence are unclear is to pause, investigate and consult a qualified scholar with the actual contract and documents.</div></section>
 </main>
-<footer class="footer"><strong>360HH</strong><p>Principles before pressure • © <span id="year"></span> OBA</p></footer>
+<footer class="footer"><strong>360 Halal Hustlers</strong><p>Principles before pressure • © <span id="year"></span> OBA</p></footer>
 <script src="./assets/js/app.js"></script><script>
 document.querySelectorAll('.topic-tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.topic-tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.learning-panel').forEach(x=>x.classList.remove('active'));tab.classList.add('active');document.getElementById(tab.dataset.topic).classList.add('active');history.replaceState(null,'','#'+tab.dataset.topic);window.scrollTo({top:document.querySelector('.topic-nav').offsetTop-85,behavior:'smooth'});}));
 const initial=location.hash.replace('#',''); if(initial&&document.getElementById(initial)){document.querySelector('[data-topic="'+initial+'"]').click();}
