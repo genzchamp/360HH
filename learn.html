@@ -4,7 +4,7 @@
 <meta name="description" content="360HH deep learning library covering stocks, crypto, Islamic finance, risk, research and security.">
 <title>Learn — 360HH</title><link rel="stylesheet" href="./assets/css/style.css"></head>
 <body>
-<header class="site-header"><a class="brand" href="./index.html"><span>360</span>HH</a><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button><nav class="nav"><a href="./index.html">Home</a><a class="active" href="./learn.html">Learn</a><a href="./tools.html">Tools</a><a href="./shariah.html">Shariah</a><a href="./resources.html">Resources</a><a href="./about.html">About</a></nav></header>
+<header class="site-header"><a class="brand" href="./index.html"><img src="./assets/brand/360hh-logo.svg" alt="360 Halal Hustlers"><span class="brand-text"><b>360</b><small>HALAL HUSTLERS</small></span></a><button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button><nav class="nav"><a href="./index.html">Home</a><a class="active" href="./learn.html">Learn</a><a href="./tools.html">Tools</a><a href="./shariah.html">Shariah</a><a href="./resources.html">Resources</a><a href="./about.html">About</a></nav></header>
 <main>
 <section class="container page-hero"><span class="kicker">LEARNING LIBRARY</span><h1>Learn deeply. Research carefully. Act with principles.</h1><p>Choose a topic below. Everything stays on this page so you can move from fundamentals to advanced questions without losing the learning trail.</p></section>
 <section class="container topic-nav" aria-label="Learning topics">
@@ -68,7 +68,7 @@
 </section>
 <section class="container section"><div class="notice"><strong>Important:</strong> 360HH is an educational library, not a personal financial adviser or mufti. Market data changes, contracts differ, and Shariah analysis can depend on the exact facts. For a personal ruling, take the actual transaction and documentation to a qualified scholar knowledgeable in contemporary financial transactions.</div></section>
 </main>
-<footer class="footer"><strong>360HH</strong><p>Education first • © <span id="year"></span> OBA</p></footer>
+<footer class="footer"><strong>360 Halal Hustlers</strong><p>Education first • © <span id="year"></span> OBA</p></footer>
 <script src="./assets/js/app.js"></script>
 <script>
 document.querySelectorAll('.topic-tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.topic-tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.learning-panel').forEach(x=>x.classList.remove('active'));tab.classList.add('active');document.getElementById(tab.dataset.topic).classList.add('active');history.replaceState(null,'','#'+tab.dataset.topic);window.scrollTo({top:document.querySelector('.topic-nav').offsetTop-85,behavior:'smooth'});}));
